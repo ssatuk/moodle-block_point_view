@@ -67,7 +67,7 @@ define(['jquery', 'core/ajax', 'core/notification'], function($, ajax, notificat
                 'style': 'background-color: ' + trackColors[difficultyLevel] + ';'
             });
             // Decide where to put the track.
-            var $container = $('#module-' + module.id + ' .mod-indent-outer');
+            var $container = $('#module-' + module.id + ' .activitytitle');
 
             // Add the track.
             if ($container.find('.block_point_view.track').length === 0) {
@@ -126,7 +126,7 @@ define(['jquery', 'core/ajax', 'core/notification'], function($, ajax, notificat
             if ($('#module-' + moduleId).length === 1 && $get(moduleId).length === 0) {
 
                 // Add the reaction zone to the module.
-                $('#module-' + moduleId).prepend(reactionsHtml);
+                $('#module-' + moduleId + ' .activity-instance').after(reactionsHtml);
 
                 // Setup reaction change.
                 var reactionsLock = false;
@@ -288,7 +288,20 @@ define(['jquery', 'core/ajax', 'core/notification'], function($, ajax, notificat
 
             $get(moduleId, '.group_nb').delay(200).hide(300);
 
-            $('#module-' + moduleId + ' .actions').delay(200).hide(300);
+            $('#module-' + moduleId + ' .activity-info button[data-action="toggle-manual-completion"],' +
+              '#module-' + moduleId + ' .activity-info .automatic-completion-conditions > span.badge:first-of-type')
+            .delay(200).queue(function(next) {
+                // Use opacity transition for a smooth hiding.
+                $(this).css({
+                    opacity: 0,
+                    transition : 'opacity 0.3s ease-in-out'
+                });
+                next();
+            }).delay(300).queue(function(next) {
+                // Actually make the element invisible to avoid accidental clicking on transparent element.
+                $(this).addClass('invisible');
+                next();
+            });
 
             ['easy', 'better', 'hard'].forEach(function(reaction, index) {
                 var delay = 50 + 150 * index; // Easy: 50, better: 200, hard: 350.
@@ -335,7 +348,17 @@ define(['jquery', 'core/ajax', 'core/notification'], function($, ajax, notificat
 
             $get(moduleId, '.group_nb').delay(600).show(0);
 
-            $('#module-' + moduleId + ' .actions').delay(600).show(300);
+            $('#module-' + moduleId + ' .activity-info button[data-action="toggle-manual-completion"],' +
+              '#module-' + moduleId + ' .activity-info .automatic-completion-conditions > span.badge:first-of-type')
+            .delay(600).queue(function(next) {
+                $(this).removeClass('invisible');
+                // Use opacity transition for a smooth showing back.
+                $(this).css({
+                    opacity: 1,
+                    transition : 'opacity 0.3s ease-in-out'
+                });
+                next();
+            });
         };
 
         // Setup some timeouts and locks to trigger animations.
