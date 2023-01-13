@@ -294,7 +294,7 @@ define(['jquery', 'core/ajax', 'core/notification'], function($, ajax, notificat
                 // Use opacity transition for a smooth hiding.
                 $(this).css({
                     opacity: 0,
-                    transition : 'opacity 0.3s ease-in-out'
+                    transition: 'opacity 0.3s ease-in-out'
                 });
                 next();
             }).delay(300).queue(function(next) {
@@ -355,7 +355,7 @@ define(['jquery', 'core/ajax', 'core/notification'], function($, ajax, notificat
                 // Use opacity transition for a smooth showing back.
                 $(this).css({
                     opacity: 1,
-                    transition : 'opacity 0.3s ease-in-out'
+                    transition: 'opacity 0.3s ease-in-out'
                 });
                 next();
             });
