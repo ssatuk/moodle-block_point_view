@@ -68,6 +68,10 @@ define(['jquery', 'core/ajax', 'core/notification'], function($, ajax, notificat
             });
             // Decide where to put the track.
             var $container = $('#module-' + module.id + ' .activitytitle');
+            if ($container.length === 0) {
+                // This seems to be a label.
+                $container = $('#module-' + module.id + ' .activity-item');
+            }
 
             // Add the track.
             if ($container.find('.block_point_view.track').length === 0) {
