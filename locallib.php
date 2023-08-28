@@ -298,3 +298,13 @@ function block_point_view_require_edit_form_javascript($blockcontextid) {
                                     ], 'block_point_view');
     $PAGE->requires->strings_for_js([ 'ok', 'info' ], 'moodle');
 }
+
+/**
+ * Change where this block appears to display it in subcontexts (especially course module pages).
+ *
+ * @param int $blockinstanceid Block instance ID.
+ */
+function block_point_view_show_in_subcontexts($blockinstanceid) {
+    global $DB;
+    $DB->update_record('block_instances', [ 'id' => $blockinstanceid, 'showinsubcontexts' => 1, 'pagetypepattern' => '*' ]);
+}

@@ -102,6 +102,19 @@ define(['jquery', 'core/ajax', 'core/notification'], function($, ajax, notificat
         });
     }
 
+    /**
+     * Setup change listener to update track color responsively when it is changed from select.
+     * @param {Object} trackcolors Mapping of trackname => CSS color.
+     */
+    function setupDifficultyTrackChange(trackcolors) {
+        // Difficulty track change.
+        $('.moduletrackselect select').change(function() {
+            $('#track_' + $(this).data('id')).css({
+                'background-color': trackcolors[$(this).val()] // Change track color.
+            });
+        }).change(); // Update track colors once on page load.
+    }
+
     return {
         init: function(envconf, trackcolors) {
 
@@ -109,12 +122,7 @@ define(['jquery', 'core/ajax', 'core/notification'], function($, ajax, notificat
 
             manageEnableDisableButtons();
 
-            // Difficulty track change.
-            $('.moduletrackselect select').change(function() {
-                $('#track_' + $(this).data('id')).css({
-                    'background-color': trackcolors[$(this).val()] // Change track color.
-                });
-            }).change(); // Update track colors once on page load.
+            setupDifficultyTrackChange(trackcolors);
 
             // Custom emoji deletion.
             buttonWithAjaxCall(
@@ -197,6 +205,8 @@ define(['jquery', 'core/ajax', 'core/notification'], function($, ajax, notificat
                         }
                 );
             });
-        }
+        },
+
+        setupDifficultyTrackChange: setupDifficultyTrackChange
     };
 });
