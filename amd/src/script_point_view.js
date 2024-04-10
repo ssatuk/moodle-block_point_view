@@ -29,14 +29,21 @@ define(['jquery', 'core/ajax', 'core/notification'], function($, ajax, notificat
 
         // The following listener is needed for the Tiles course format, where sections are loaded on demand.
         $(document).ajaxComplete(function(event, xhr, settings) {
-            if (typeof (settings.data) !== 'undefined') {
+            if (typeof (settings.data) !== 'string') {
+                return;
+            }
+            try {
                 var data = JSON.parse(settings.data);
-                if (data.length > 0 && typeof (data[0].methodname) !== 'undefined') {
-                    if (data[0].methodname == 'format_tiles_get_single_section_page_html' // Tile load.
-                        || data[0].methodname == 'format_tiles_log_tile_click') { // Tile load, cached.
-                        call();
-                    }
+                if (data.length == 0 || typeof (data[0].methodname) === 'undefined') {
+                    return;
                 }
+                if (data[0].methodname == 'format_tiles_get_single_section_page_html' // Tile load.
+                    || data[0].methodname == 'format_tiles_log_tile_click') { // Tile load, cached.
+                    call();
+                }
+            } catch (e) {
+                // Something went wrong, it may not even be JSON. It is fine, this means it was not the call we were expecting.
+                return;
             }
         });
     }
