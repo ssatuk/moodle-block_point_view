@@ -63,11 +63,11 @@
     margin-right: 1.5rem;
 }
 
-.block_point_view.reactions-container+.description .activity-altcontent {
+.block_point_view.reactions-container + .description .activity-altcontent {
     padding-right: 160px;
 }
 
-.activity-item.activityinline .block_point_view.reactions-container+.description .activity-altcontent {
+.activity-item.activityinline .block_point_view.reactions-container + .description .activity-altcontent {
     padding-right: 184px;
 }
 
@@ -88,7 +88,7 @@
     width: max-content;
 }
 .activity-wrapper.label .block_point_view.reactions-container .reactions {
-    right: -30px
+    right: -30px;
 }
 
 .block_point_view.reactions-container .group {
@@ -101,7 +101,7 @@
     right: 8px;
 }
 .activity-wrapper.label .block_point_view.reactions-container .group {
-    right: 38px
+    right: 38px;
 }
 
 .path-mod #page-header .block_point_view.reactions-container {

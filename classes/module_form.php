@@ -36,6 +36,10 @@ require_once($CFG->libdir . '/formslib.php');
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class module_form extends \moodleform {
+    /**
+     * {@inheritDoc}
+     * @see \moodleform::definition()
+     */
     public function definition() {
         $mform = $this->_form;
 
