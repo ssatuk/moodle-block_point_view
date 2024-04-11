@@ -71,7 +71,7 @@ define(['jquery', 'core/ajax', 'core/notification'], function($, ajax, notificat
             var $container = $('#module-' + module.id + ' .activitytitle');
             if ($container.length === 0) {
                 // This seems to be a label.
-                $container = $('#module-' + module.id + ' .activity-item');
+                $container = $('#module-' + module.id + ' .activity-item .description');
             }
 
             // Add the track.
@@ -87,7 +87,6 @@ define(['jquery', 'core/ajax', 'core/notification'], function($, ajax, notificat
             }
         });
     }
-
 
     /**
      * Get a jQuery object in reaction zone for given module ID.
@@ -143,7 +142,16 @@ define(['jquery', 'core/ajax', 'core/notification'], function($, ajax, notificat
             if ($('#module-' + moduleId).length === 1 && $get(moduleId).length === 0) {
 
                 // Add the reaction zone to the module.
-                $('#module-' + moduleId + ' .activity-instance').after(reactionsHtml);
+                var $module = $('#module-' + moduleId);
+                if ($module.is('.modtype_label')) {
+                    // Label.
+                    $module.find('.description').before(reactionsHtml);
+                } else if ($module.find('.tiles-activity-container').length) {
+                    // Tiles format.
+                    $module.find('.tiles-activity-container').after(reactionsHtml);
+                } else {
+                    $module.find('.activity-instance').after(reactionsHtml);
+                }
 
                 // Setup reaction change.
                 var reactionsLock = false;

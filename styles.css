@@ -59,6 +59,18 @@
     flex: 1 0;
 }
 
+.activity-item.activityinline .block_point_view.reactions-container {
+    margin-right: 1.5rem;
+}
+
+.block_point_view.reactions-container+.description .activity-altcontent {
+    padding-right: 160px;
+}
+
+.activity-item.activityinline .block_point_view.reactions-container+.description .activity-altcontent {
+    padding-right: 184px;
+}
+
 .block_point_view.reactions-container ~ .mod-indent-outer,
 .block_point_view.reactions-container ~ div .mod-indent-outer {
     max-width: 80%;
