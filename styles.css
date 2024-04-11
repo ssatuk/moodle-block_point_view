@@ -159,6 +159,10 @@
     grid-template-columns: repeat(2, auto);
 }
 
+.block_point_view .enablemodulereactions.highlighted {
+    box-shadow: 0 0 1.5px 2px var(--info);
+}
+
 /* Some adjustments for Adaptable theme */
 .theme_adaptable.path-course-view .activity .block_point_view.track {
     height: 2em;
