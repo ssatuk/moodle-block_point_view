@@ -61,6 +61,8 @@ define(['jquery', 'core/ajax', 'core/notification'], function($, ajax, notificat
         $('.enablemodulereactions').change(function() {
             updateEnableDisableButtonsFor($(this).data('type')); // Update Enable/Disable buttons state for module type.
             updateEnableDisableButtonsFor($(this).data('section')); // Update Enable/Disable buttons state for section.
+        }).click(function() {
+            $('.enablemodulereactions.highlighted').removeClass('highlighted');
         });
 
         $('.enable-disable button').each(function() {
@@ -69,8 +71,10 @@ define(['jquery', 'core/ajax', 'core/notification'], function($, ajax, notificat
             updateEnableDisableButtonsFor(sectionOrType); // Update Enable/Disable buttons state on page load.
 
             $(this).click(function() {
+                $('.enablemodulereactions.highlighted').removeClass('highlighted');
                 $('.cb' + sectionOrType + ':checkbox')
                 .prop('checked', $(this).data('enable')) // Update all corresponding checkboxes.
+                .addClass('highlighted')
                 .change(); // Trigger a change to update Enable/Disable buttons state accordingly.
             });
         });
