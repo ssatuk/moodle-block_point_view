@@ -26,10 +26,10 @@
 
 namespace block_point_view\privacy;
 
-use \core_privacy\local\metadata\collection;
+use core_privacy\local\metadata\collection;
 use core_privacy\local\request\approved_userlist;
-use \core_privacy\local\request\contextlist;
-use \core_privacy\local\request\approved_contextlist;
+use core_privacy\local\request\contextlist;
+use core_privacy\local\request\approved_contextlist;
 use core_privacy\local\request\userlist;
 
 /**
@@ -56,15 +56,14 @@ class provider implements
      * @param collection $collection
      * @return collection
      */
-    public static function get_metadata(collection $collection) : collection {
+    public static function get_metadata(collection $collection): collection {
         $collection->add_database_table(
             'block_point_view',
             [
                 'courseid' => 'privacy:metadata:activity_votes_database:courseid',
                 'cmid' => 'privacy:metadata:activity_votes_database:cmid',
                 'userid' => 'privacy:metadata:activity_votes_database:userid',
-                'vote' => 'privacy:metadata:activity_votes_database:vote'
-
+                'vote' => 'privacy:metadata:activity_votes_database:vote',
             ],
             'privacy:metadata:block_point_view'
         );
@@ -78,7 +77,7 @@ class provider implements
      * @param   int $userid The user to search.
      * @return  contextlist   $contextlist  The contextlist containing the list of contexts used in this plugin.
      */
-    public static function get_contexts_for_userid(int $userid) : contextlist {
+    public static function get_contexts_for_userid(int $userid): contextlist {
         $sql = 'SELECT DISTINCT ctx.id
                 FROM {block_point_view} bpv
                 JOIN {context} ctx
@@ -107,7 +106,7 @@ class provider implements
             $pointviewdata[] = (object) [
                 'courseid' => $result->courseid,
                 'cmid' => $result->cmid,
-                'vote' => $result->vote
+                'vote' => $result->vote,
             ];
         }
         if (!empty($pointviewdata)) {

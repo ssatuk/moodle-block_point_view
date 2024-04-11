@@ -106,7 +106,7 @@ class block_point_view extends block_base {
                 $parameters = [
                     'instanceid' => $this->instance->id,
                     'contextid' => $this->context->id,
-                    'courseid' => $COURSE->id
+                    'courseid' => $COURSE->id,
                 ];
 
                 $url = new moodle_url('/blocks/point_view/overview.php', $parameters);
