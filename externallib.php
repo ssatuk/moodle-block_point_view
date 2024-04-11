@@ -42,12 +42,12 @@ class block_point_view_external extends external_api {
      */
     public static function update_db_parameters() {
         return new external_function_parameters(
-            array(
+            [
                 'func' => new external_value(PARAM_TEXT, 'function name to call', VALUE_REQUIRED),
                 'courseid' => new external_value(PARAM_INT, 'id of course', VALUE_REQUIRED),
                 'cmid' => new external_value(PARAM_INT, 'id of course module', VALUE_DEFAULT, 0),
-                'vote' => new external_value(PARAM_INT, 'id of vote', VALUE_DEFAULT, 0)
-            )
+                'vote' => new external_value(PARAM_INT, 'id of vote', VALUE_DEFAULT, 0),
+            ]
         );
     }
 
@@ -63,12 +63,12 @@ class block_point_view_external extends external_api {
     public static function update_db(string $func, int $courseid, int $cmid, int $vote) {
         global $DB, $USER;
 
-        $params = self::validate_parameters(self::update_db_parameters(), array(
+        $params = self::validate_parameters(self::update_db_parameters(), [
                 'func' => $func,
                 'courseid' => $courseid,
                 'cmid' => $cmid,
-                'vote' => $vote
-            )
+                'vote' => $vote,
+            ]
         );
 
         $table = 'block_point_view';
@@ -78,8 +78,8 @@ class block_point_view_external extends external_api {
         switch ($params['func']) {
             case 'update':
 
-                $blockrecord = $DB->get_record('block_instances', array('blockname' => 'point_view',
-                        'parentcontextid' => $coursecontext->id), '*', MUST_EXIST);
+                $blockrecord = $DB->get_record('block_instances',
+                        [ 'blockname' => 'point_view', 'parentcontextid' => $coursecontext->id ], '*', MUST_EXIST);
                 $blockinstance = block_instance('point_view', $blockrecord);
 
                 $canreact = isset($blockinstance->config->enable_point_views)
@@ -92,11 +92,11 @@ class block_point_view_external extends external_api {
                     throw new moodle_exception('reactionsunavailable', 'block_point_view');
                 }
 
-                $dbparams = array(
+                $dbparams = [
                         'userid' => $USER->id,
                         'courseid' => $params['courseid'],
-                        'cmid' => $params['cmid']
-                );
+                        'cmid' => $params['cmid'],
+                ];
 
                 if ($params['vote'] === 0) {
                     $DB->delete_records($table, $dbparams);
@@ -117,10 +117,10 @@ class block_point_view_external extends external_api {
                 require_capability('moodle/site:manageblocks', $coursecontext);
                 if ($params['cmid'] == 0) {
                     // Delete for all the course.
-                    $DB->delete_records($table, array('courseid' => $params['courseid']));
+                    $DB->delete_records($table, [ 'courseid' => $params['courseid'] ]);
                 } else {
                     // Delete only for a module.
-                    $DB->delete_records($table, array('courseid' => $params['courseid'], 'cmid' => $params['cmid']));
+                    $DB->delete_records($table, [ 'courseid' => $params['courseid'], 'cmid' => $params['cmid'] ]);
                 }
                 break;
             case 'cleanup':
@@ -153,11 +153,11 @@ class block_point_view_external extends external_api {
      */
     public static function delete_custom_pix_parameters() {
         return new external_function_parameters(
-                array(
+                [
                         'contextid' => new external_value(PARAM_INT, 'id of context', VALUE_REQUIRED),
                         'courseid' => new external_value(PARAM_INT, 'id of course', VALUE_REQUIRED),
-                        'draftitemid' => new external_value(PARAM_INT, 'id of draft file area', VALUE_REQUIRED)
-                )
+                        'draftitemid' => new external_value(PARAM_INT, 'id of draft file area', VALUE_REQUIRED),
+                ]
         );
     }
 

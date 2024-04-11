@@ -40,8 +40,7 @@ class block_point_view_observer {
         global $DB;
 
         $coursecontext = context_course::instance($event->courseid);
-        $blockrecord = $DB->get_record('block_instances', array('blockname' => 'point_view',
-                'parentcontextid' => $coursecontext->id));
+        $blockrecord = $DB->get_record('block_instances', [ 'blockname' => 'point_view', 'parentcontextid' => $coursecontext->id ]);
 
         if ($blockrecord !== false && !empty($blockrecord->configdata)) {
             $blockinstance = block_instance('point_view', $blockrecord);
@@ -68,8 +67,7 @@ class block_point_view_observer {
         global $DB;
 
         $coursecontext = context_course::instance($event->courseid);
-        $blockrecord = $DB->get_record('block_instances', array('blockname' => 'point_view',
-                'parentcontextid' => $coursecontext->id));
+        $blockrecord = $DB->get_record('block_instances', [ 'blockname' => 'point_view', 'parentcontextid' => $coursecontext->id ]);
 
         if ($blockrecord !== false && !empty($blockrecord->configdata)) {
             $blockinstance = block_instance('point_view', $blockrecord);
@@ -78,6 +76,6 @@ class block_point_view_observer {
             $blockinstance->instance_config_commit();
         }
 
-        $DB->delete_records('block_point_view', array('courseid' => $event->courseid, 'cmid' => $event->objectid));
+        $DB->delete_records('block_point_view', [ 'courseid' => $event->courseid, 'cmid' => $event->objectid ]);
     }
 }

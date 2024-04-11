@@ -46,17 +46,17 @@ class backup_point_view_block_task extends backup_block_task {
     }
 
     /**
-     * Define one array() of fileareas that this block controls
+     * Define one array of fileareas that this block controls
      */
     public function get_fileareas() {
-        return array('point_views_pix');
+        return [ 'point_views_pix' ];
     }
 
     /**
-     * Define one array() of configdata attributes that need to be processed by the contenttransformer
+     * Define one array of configdata attributes that need to be processed by the contenttransformer
      */
     public function get_configdata_encoded_attributes() {
-        return array();
+        return [];
     }
 
     /**

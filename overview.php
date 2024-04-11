@@ -43,15 +43,15 @@ $course = get_course($courseid);
 $PAGE->set_course($course);
 $PAGE->set_context($context);
 
-$blockrecord = $DB->get_record('block_instances', array('id' => $id));
+$blockrecord = $DB->get_record('block_instances', [ 'id' => $id ]);
 
 block_point_view_check_instance($blockrecord, $context, format_string($course->fullname));
 
-$parameters = array (
+$parameters = [
         'instanceid' => $id,
         'contextid'  => $contextid,
-        'courseid'   => $courseid
-);
+        'courseid'   => $courseid,
+];
 
 $PAGE->set_url(new moodle_url("{$CFG->wwwroot}/blocks/point_view/overview.php", $parameters));
 
@@ -81,21 +81,21 @@ $sql = 'SELECT cmid,
     WHERE courseid = :courseid
   GROUP BY cmid, TableTypeOne.TotalTypeOne, TableTypeTwo.TotalTypeTwo, TableTypeThree.TotalTypethree;';
 
-$result = $DB->get_records_sql($sql, array('courseid' => $courseid));
+$result = $DB->get_records_sql($sql, [ 'courseid' => $courseid ]);
 
 $users = $DB->get_records('user', null, '', user_picture::fields());
 
 $sqldata = $DB->get_records('block_point_view', ['courseid' => $courseid], '', 'id,cmid,userid,vote');
 
-$usersdisplay = array();
+$usersdisplay = [];
 
-$tabledata = array();
-$tablerowclasses = array();
+$tabledata = [];
+$tablerowclasses = [];
 
 $isdownloading = ($downloadformat > '');
-$downloaddata = array();
+$downloaddata = [];
 
-$votestypes = array('typeone' => 'easy', 'typetwo' => 'better', 'typethree' => 'hard');
+$votestypes = [ 'typeone' => 'easy', 'typetwo' => 'better', 'typethree' => 'hard' ];
 $pixparam = block_point_view_get_current_pix($block, array_values($votestypes));
 
 $cms = get_fast_modinfo($courseid, -1)->cms;
@@ -107,12 +107,11 @@ foreach ($cms as $cm) {
         $modulename = $cm->get_formatted_name();
 
         if (!$isdownloading) {
-            $icon = $OUTPUT->pix_icon('icon', $cm->get_module_type_name(), $cm->modname,
-                    array('class' => 'iconlarge activityicon'));
+            $icon = $OUTPUT->pix_icon('icon', $cm->get_module_type_name(), $cm->modname, [ 'class' => 'iconlarge activityicon' ]);
             $modulename = $icon . $modulename;
         }
 
-        $votecells = array();
+        $votecells = [];
         foreach ($votestypes as $type => $difficulty) {
             $nvotes = intval($result[$cm->id]->$type);
             if ($isdownloading) {
@@ -120,12 +119,12 @@ foreach ($cms as $cm) {
             } else {
                 $text = block_point_view_get_reaction_text($block, $difficulty);
                 $votecell = new html_table_cell(
-                        html_writer::empty_tag('img', array(
+                        html_writer::empty_tag('img', [
                                 'src' => $pixparam[$difficulty],
                                 'class' => 'overview_img align-bottom mr-1',
                                 'alt' => $text,
-                                'title' => $text
-                        )) .
+                                'title' => $text,
+                        ]) .
                         '<span class="votePercent">' .
                         round(100 * $nvotes / intval($result[$cm->id]->total)) . '%' .
                         '</span>' .
@@ -137,7 +136,7 @@ foreach ($cms as $cm) {
             }
         }
 
-        $details = array_fill(0, 7, array());
+        $details = array_fill(0, 7, []);
 
         foreach ($sqldata as $row) {
             if ($row->cmid == $cm->id) {
@@ -152,21 +151,21 @@ foreach ($cms as $cm) {
             }
         }
 
-        $data = array(
+        $data = [
                 $sectionname,
                 $modulename,
                 $votecells[0],
                 $votecells[1],
                 $votecells[2],
-                $result[$cm->id]->total
-        );
+                $result[$cm->id]->total,
+        ];
 
         if ($isdownloading) {
             // Set a slighlty different layout for table download.
-            $vote = array ('easy', 'better', 'hard');
+            $vote = [ 'easy', 'better', 'hard' ];
             foreach (array_slice($details, 2, 3) as $uservote => $usernames) {
                 foreach ($usernames as $username) {
-                    $downloaddata[] = array_merge($data, array( $vote[$uservote], $username));
+                    $downloaddata[] = array_merge($data, [ $vote[$uservote], $username ]);
                 }
             }
         } else {
@@ -176,7 +175,7 @@ foreach ($cms as $cm) {
             $detailsrow->style = 'display: none;';
 
             array_push($tabledata,
-                    array_merge($data, array( '<i class="fa fa-fw fa-lg fa-caret-right" style="display: none;"></i>' )),
+                    array_merge($data, [ '<i class="fa fa-fw fa-lg fa-caret-right" style="display: none;"></i>' ]),
                     $detailsrow
                     );
 
@@ -190,7 +189,7 @@ if ($isdownloading) {
     // This is a request to download the table.
     confirm_sesskey();
 
-    $headers = array(
+    $headers = [
             get_string('section'),
             get_string('module', 'block_point_view'),
             'easy_vote_number',
@@ -198,8 +197,8 @@ if ($isdownloading) {
             'hard_vote_number',
             get_string('total'),
             'user_vote',
-            get_string('user')
-    );
+            get_string('user'),
+    ];
 
     $file = $CFG->dirroot . '/dataformat/' . $downloadformat . '/classes/writer.php';
     if (is_readable($file)) {
@@ -237,39 +236,39 @@ if (!empty($result)) {
 
     $table = new html_table();
 
-    $table->head = array(
+    $table->head = [
         get_string('section'),
         get_string('module', 'block_point_view'),
         '',
         get_string('reactions', 'block_point_view'),
         '',
         get_string('total'),
-        ''
-    );
+        '',
+    ];
 
-    $table->size = array(
+    $table->size = [
             '5%',
             '25%',
             '20%',
             '20%',
             '20%',
             '5%',
-            '5%'
-    );
+            '5%',
+    ];
 
     $table->attributes['class'] = 'generaltable';
 
     $table->rowclasses = $tablerowclasses;
 
-    $table->colclasses = array(
+    $table->colclasses = [
             '',
             '',
             'reactions-col clickable',
             'reactions-col clickable',
             'reactions-col clickable',
             'text-center',
-            'text-center clickable font-weight-bold'
-    );
+            'text-center clickable font-weight-bold',
+    ];
 
     $table->data = $tabledata;
 

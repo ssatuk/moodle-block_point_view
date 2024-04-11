@@ -24,15 +24,15 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$observers = array(
-    array(
+$observers = [
+    [
         'eventname' => '\core\event\course_module_created',
         'callback' => 'block_point_view_observer::store',
-        'internal' => false
-    ),
-    array(
+        'internal' => false,
+    ],
+    [
         'eventname' => '\core\event\course_module_deleted',
         'callback' => 'block_point_view_observer::remove',
-        'internal' => false
-    )
-);
+        'internal' => false,
+    ],
+];

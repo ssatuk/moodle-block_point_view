@@ -25,38 +25,38 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$capabilities = array(
-    'block/point_view:access_overview' => array(
+$capabilities = [
+    'block/point_view:access_overview' => [
         'riskbitmask' => RISK_PERSONAL,
         'captype' => 'read',
         'contextlevel' => CONTEXT_BLOCK,
-        'archetypes' => array(
+        'archetypes' => [
             'teacher' => CAP_ALLOW,
             'editingteacher' => CAP_ALLOW,
             'manager' => CAP_ALLOW,
-            'coursecreator' => CAP_ALLOW
-        )
-    ),
+            'coursecreator' => CAP_ALLOW,
+        ],
+    ],
 
-    'block/point_view:myaddinstance' => array(
+    'block/point_view:myaddinstance' => [
         'captype' => 'write',
         'contextlevel' => CONTEXT_SYSTEM,
-        'archetypes' => array(
-            'user' => CAP_ALLOW
-        ),
+        'archetypes' => [
+            'user' => CAP_ALLOW,
+        ],
 
-        'clonepermissionsfrom' => 'moodle/my:manageblocks'
-    ),
+        'clonepermissionsfrom' => 'moodle/my:manageblocks',
+    ],
 
-    'block/point_view:addinstance' => array(
+    'block/point_view:addinstance' => [
         'riskbitmask' => RISK_SPAM | RISK_XSS,
         'captype' => 'write',
         'contextlevel' => CONTEXT_BLOCK,
-        'archetypes' => array(
+        'archetypes' => [
             'editingteacher' => CAP_ALLOW,
-            'manager' => CAP_ALLOW
-        ),
+            'manager' => CAP_ALLOW,
+        ],
 
-        'clonepermissionsfrom' => 'moodle/site:manageblocks'
-    ),
-);
+        'clonepermissionsfrom' => 'moodle/site:manageblocks',
+    ],
+];

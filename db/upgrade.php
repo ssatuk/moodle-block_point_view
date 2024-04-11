@@ -39,7 +39,7 @@ function xmldb_block_point_view_upgrade($oldversion, $block) {
             block/point_view:access_menu -> block/point_view:access_overview),
             please check permissions on administration tab.', \core\output\notification::NOTIFY_INFO);
 
-        $blockrecords = $DB->get_records('block_instances', array('blockname' => 'point_view'));
+        $blockrecords = $DB->get_records('block_instances', [ 'blockname' => 'point_view' ]);
         foreach ($blockrecords as $blockrecord) {
             if (!empty($blockrecord->configdata)) {
                 $blockinstance = block_instance('point_view', $blockrecord);
@@ -69,11 +69,11 @@ function xmldb_block_point_view_upgrade($oldversion, $block) {
                 }
                 unset($config->enable_pix_checkbox);
 
-                $DB->update_record('block_instances', array(
+                $DB->update_record('block_instances', [
                         'id' => $blockrecord->id,
                         'configdata' => base64_encode(serialize($config)),
-                        'timemodified' => time()
-                ));
+                        'timemodified' => time(),
+                ]);
             }
         }
         upgrade_block_savepoint( true , $v1x6, 'point_view');

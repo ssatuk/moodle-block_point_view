@@ -55,9 +55,9 @@ class block_point_view extends block_base {
      * @return array
      */
     public function applicable_formats() {
-        return array(
-            'course-view' => true
-        );
+        return [
+            'course-view' => true,
+        ];
     }
 
     /**
@@ -115,12 +115,12 @@ class block_point_view extends block_base {
 
                 $this->content->text .= html_writer::link(
                         $url,
-                        html_writer::empty_tag('img', array(
+                        html_writer::empty_tag('img', [
                                 'src' => $pix,
                                 'alt' => $title,
-                                'class' => 'overview-link d-block mx-auto text-center'
-                        )),
-                        array('title' => $title)
+                                'class' => 'overview-link d-block mx-auto text-center',
+                        ]),
+                        [ 'title' => $title ]
                 );
             }
 
@@ -178,8 +178,8 @@ class block_point_view extends block_base {
 
             global $OUTPUT;
             $templatecontext = new stdClass();
-            $templatecontext->reactions = array();
-            foreach (array('easy', 'better', 'hard') as $reactionname) {
+            $templatecontext->reactions = [];
+            foreach ([ 'easy', 'better', 'hard' ] as $reactionname) {
                 $reaction = new stdClass();
                 $reaction->name = $reactionname;
                 $reaction->pix = $blockdata->pix[$reactionname];
@@ -189,9 +189,10 @@ class block_point_view extends block_base {
             $blockdata->reactionstemplate = $OUTPUT->render_from_template('block_point_view/reactions', $templatecontext);
 
             // Create and place a node containing data for the javascript.
-            $datanode = html_writer::span('', 'block_point_view', array(
-                    'data-blockdata' => json_encode($blockdata), 'style' => 'display:none;'
-            ));
+            $datanode = html_writer::span('', 'block_point_view', [
+                    'data-blockdata' => json_encode($blockdata),
+                    'style' => 'display:none;',
+            ]);
 
             if (($this->config->highlight_activity_rows ?? true)) {
                 // Add shade on hover of a course module.
@@ -208,9 +209,9 @@ class block_point_view extends block_base {
             $this->page->requires->js_init_code('document.getElementsByClassName("course-content")[0]
                                                  .insertAdjacentHTML("beforeend", "' . addslashes_js($datanode . $cssnode) . '");');
 
-            $strings = array('totalreactions', 'greentrack', 'bluetrack', 'redtrack', 'blacktrack');
+            $strings = [ 'totalreactions', 'greentrack', 'bluetrack', 'redtrack', 'blacktrack' ];
             $this->page->requires->strings_for_js($strings, 'block_point_view');
-            $this->page->requires->js_call_amd('block_point_view/script_point_view', 'init', array($COURSE->id));
+            $this->page->requires->js_call_amd('block_point_view/script_point_view', 'init', [ $COURSE->id ]);
         }
     }
 
@@ -233,7 +234,7 @@ class block_point_view extends block_base {
             'block_point_view',
             'content',
             0,
-            array('subdirs' => true),
+            [ 'subdirs' => true ],
             $data->text['text']
         );
 
@@ -300,7 +301,7 @@ class block_point_view extends block_base {
                 'block_point_view',
                 'content',
                 0,
-                array('subdirs' => true)
+                [ 'subdirs' => true ]
             );
 
             file_save_draft_area_files(
@@ -309,7 +310,7 @@ class block_point_view extends block_base {
                 'block_point_view',
                 'content',
                 0,
-                array('subdirs' => true)
+                [ 'subdirs' => true ]
             );
 
         }
@@ -324,7 +325,7 @@ class block_point_view extends block_base {
                 'block_point_view',
                 'point_views_pix',
                 0,
-                array('subdirs' => true)
+                [ 'subdirs' => true ]
             );
 
             file_save_draft_area_files(
@@ -333,7 +334,7 @@ class block_point_view extends block_base {
                 'block_point_view',
                 'point_views_pix',
                 0,
-                array('subdirs' => true)
+                [ 'subdirs' => true ]
             );
 
         }

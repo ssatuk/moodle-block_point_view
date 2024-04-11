@@ -39,8 +39,8 @@ class backup_point_view_block_structure_step extends backup_block_structure_step
 
         if ($this->get_setting_value('users')) {
             $reactions = new backup_nested_element('reactions');
-            $reaction = new backup_nested_element('reaction', array('id'), array('courseid', 'cmid', 'userid', 'vote'));
-            $reaction->set_source_table('block_point_view', array('courseid' => backup::VAR_COURSEID));
+            $reaction = new backup_nested_element('reaction', [ 'id' ], [ 'courseid', 'cmid', 'userid', 'vote' ]);
+            $reaction->set_source_table('block_point_view', [ 'courseid' => backup::VAR_COURSEID ]);
             $reaction->annotate_ids('user', 'userid');
             $reactions->add_child($reaction);
             $pointview->add_child($reactions);

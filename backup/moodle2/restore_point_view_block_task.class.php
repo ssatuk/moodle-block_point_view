@@ -46,17 +46,17 @@ class restore_point_view_block_task extends restore_block_task {
     }
 
     /**
-     * Define one array() of fileareas that this block controls
+     * Define one array of fileareas that this block controls
      */
     public function get_fileareas() {
-        return array('point_views_pix');
+        return [ 'point_views_pix' ];
     }
 
     /**
-     * Define one array() of configdata attributes that need to be decoded
+     * Define one array of configdata attributes that need to be decoded
      */
     public function get_configdata_encoded_attributes() {
-        return array(); // No special handling of configdata.
+        return []; // No special handling of configdata.
     }
 
     /**
@@ -70,7 +70,7 @@ class restore_point_view_block_task extends restore_block_task {
         // Get the blockid.
         $blockid = $this->get_blockid();
 
-        if ($configdata = $DB->get_field('block_instances', 'configdata', array('id' => $blockid))) {
+        if ($configdata = $DB->get_field('block_instances', 'configdata', [ 'id' => $blockid ])) {
             $config = unserialize(base64_decode($configdata));
 
             if (!empty($config)) {
@@ -101,7 +101,7 @@ class restore_point_view_block_task extends restore_block_task {
 
                 // Encode and save the config.
                 $configdata = base64_encode(serialize($newconfig));
-                $DB->set_field('block_instances', 'configdata', $configdata, array('id' => $blockid));
+                $DB->set_field('block_instances', 'configdata', $configdata, [ 'id' => $blockid ]);
             }
         }
 
@@ -111,13 +111,13 @@ class restore_point_view_block_task extends restore_block_task {
      * Define the contents in the block that must be processed by the link decoder
      */
     public static function define_decode_contents() {
-        return array();
+        return [];
     }
 
     /**
      * Define the decoding rules for links belonging to the block to be executed by the link decoder
      */
     public static function define_decode_rules() {
-        return array();
+        return [];
     }
 }

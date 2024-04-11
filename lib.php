@@ -38,7 +38,7 @@ use core\session\manager;
  *
  * @return bool
  */
-function block_point_view_pluginfile($course, $bi, $context, $filearea, $args, $forcedownload, array $options = array()) {
+function block_point_view_pluginfile($course, $bi, $context, $filearea, $args, $forcedownload, array $options = []) {
     global $CFG, $USER;
 
     $fs = get_file_storage();
@@ -122,7 +122,7 @@ function block_point_view_supports($feature) {
 function block_point_view_global_db_replace($search, $replace) {
     global $DB;
 
-    $instances = $DB->get_recordset('block_instances', array('blockname' => 'point_view'));
+    $instances = $DB->get_recordset('block_instances', [ 'blockname' => 'point_view' ]);
     foreach ($instances as $instance) {
         $config = unserialize(base64_decode($instance->configdata));
         if (isset($config->text) && is_string($config->text)) {

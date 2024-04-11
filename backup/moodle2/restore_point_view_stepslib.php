@@ -34,14 +34,14 @@ class restore_point_view_block_structure_step extends restore_structure_step {
      * Reaction data to be added after restore, as it references modules that may not be restored yet.
      * @var array
      */
-    protected $pendingdatainsertions = array();
+    protected $pendingdatainsertions = [];
 
     /**
      * {@inheritDoc}
      * @see restore_structure_step::define_structure()
      */
     protected function define_structure() {
-        $paths = array();
+        $paths = [];
 
         if ($this->get_setting_value('users')) {
             $paths[] = new restore_path_element('reaction', '/block/point_view/reactions/reaction');

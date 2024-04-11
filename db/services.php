@@ -25,21 +25,21 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$functions = array(
-    'block_point_view_update_db' => array(
+$functions = [
+    'block_point_view_update_db' => [
         'classname'   => 'block_point_view_external',
         'methodname'  => 'update_db',
         'classpath'   => 'blocks/point_view/externallib.php',
         'description' => 'Update Database due to a vote.',
         'type'        => 'write',
-        'ajax'        => true
-    ),
-    'block_point_view_delete_custom_pix' => array(
+        'ajax'        => true,
+    ],
+    'block_point_view_delete_custom_pix' => [
         'classname'   => 'block_point_view_external',
         'methodname'  => 'delete_custom_pix',
         'classpath'   => 'blocks/point_view/externallib.php',
         'description' => 'delete custom emoji for this block instance',
         'type'        => 'write',
-        'ajax'        => true
-    )
-);
+        'ajax'        => true,
+    ],
+];

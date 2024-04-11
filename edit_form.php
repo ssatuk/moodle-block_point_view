@@ -51,13 +51,13 @@ class block_point_view_edit_form extends block_edit_form {
 
             // Add block_point_view class to form element for styling,
             // as it is not done for the body element on block edition page.
-            $mform->updateAttributes(array('class' => $mform->getAttribute('class') . ' block_point_view'));
+            $mform->updateAttributes([ 'class' => $mform->getAttribute('class') . ' block_point_view' ]);
 
             $mform->addElement('header', 'general_header', get_string('blocksettings', 'block'));
 
             // Block content.
 
-            $editoroptions = array('maxfiles' => EDITOR_UNLIMITED_FILES, 'noclean' => true, 'context' => $this->block->context);
+            $editoroptions = [ 'maxfiles' => EDITOR_UNLIMITED_FILES, 'noclean' => true, 'context' => $this->block->context ];
             $mform->addElement(
                 'editor',
                 'config_text',
@@ -106,7 +106,7 @@ class block_point_view_edit_form extends block_edit_form {
                         get_string('modulenameplural', $type),
                         'enable_disable_type',
                         'data-type="' . $type . '"',
-                        array('class' => 'reactions'));
+                        [ 'class' => 'reactions' ]);
             }
 
             $oldsection = '';
@@ -125,13 +125,13 @@ class block_point_view_edit_form extends block_edit_form {
                             $sectionname,
                             'enable_disable_section',
                             'data-section="sec' . $sectionid . '"',
-                            array('class' => 'pt-3'));
+                            [ 'class' => 'pt-3' ]);
 
                     $oldsection = $cm->sectionnum;
                 }
 
                 $icon = $OUTPUT->pix_icon('icon', $cm->get_module_type_name(), $cm->modname,
-                        array('class' => 'iconlarge activityicon'));
+                        [ 'class' => 'iconlarge activityicon' ]);
 
                 $this->add_activity_config($mform, $cm->id, $sectionid, $cm->modname, $icon . $cm->get_formatted_name());
             }
@@ -157,7 +157,7 @@ class block_point_view_edit_form extends block_edit_form {
             if (count($cms)) {
                 $sectionid = -1;
                 foreach ($cms as $cm) {
-                    if (!$DB->record_exists('block_point_view', array('courseid' => $COURSE->id, 'cmid' => $cm->id))) {
+                    if (!$DB->record_exists('block_point_view', [ 'courseid' => $COURSE->id, 'cmid' => $cm->id ])) {
                         continue;
                     }
                     if ($cm->section != $sectionid) {
@@ -168,7 +168,7 @@ class block_point_view_edit_form extends block_edit_form {
                         // Open section.
                         $cmshtml .= '<div class="pl-3"><h3>' . get_section_name($COURSE->id, $cm->sectionnum) . '</h3>';
                     }
-                    $icon = $OUTPUT->image_icon('icon', $cm->modfullname, $cm->modname, array('class' => 'activityicon'));
+                    $icon = $OUTPUT->image_icon('icon', $cm->modfullname, $cm->modname, [ 'class' => 'activityicon' ]);
                     $resetbutton = $this->get_action_button('', 'danger', 'resetreactions', null,
                             'data-cmid="' . $cm->id    . '" data-role="reset_module"');
                     $cmshtml .= html_writer::div($icon . $cm->get_formatted_name() . $resetbutton, 'mb-1');
@@ -219,7 +219,7 @@ class block_point_view_edit_form extends block_edit_form {
      * @param array $attributes Attributes to be added to the form element containing both buttons.
      */
     protected function add_enable_disable_buttons(&$mform, $grouplabel, $name,
-            $enablestr, $disablestr, $a, $helpstr, $dataattr = '', $attributes = array()) {
+            $enablestr, $disablestr, $a, $helpstr, $dataattr = '', $attributes = []) {
 
         global $OUTPUT;
 
@@ -247,17 +247,17 @@ class block_point_view_edit_form extends block_edit_form {
      * @param string $label Label for form elements (likely, course module name and icon).
      */
     protected function add_activity_config(&$mform, $cmid, $sectionid, $type, $label) {
-        $group = array();
+        $group = [];
 
         // Checkbox for reactions.
         $group[] =& $mform->createElement( 'advcheckbox', 'config_moduleselectm' . $cmid,
                 get_string('reactions', 'block_point_view'), null,
-                array(
+                [
                         'class' => 'reactions enablemodulereactions cbsec' . $sectionid . ' cb' . $type,
                         'data-section' => 'sec' . $sectionid,
-                        'data-type' => $type
-                ),
-                array(0, $cmid)
+                        'data-type' => $type,
+                ],
+                [ 0, $cmid ]
         );
 
         // Difficulty track.
@@ -266,14 +266,14 @@ class block_point_view_edit_form extends block_edit_form {
 
         // Difficulty track select.
         $group[] =& $mform->createElement( 'select', 'config_difficulty_' . $cmid, '',
-                array(
+                [
                         get_string('nonetrack', 'block_point_view'),
                         get_string('greentrack', 'block_point_view'),
                         get_string('bluetrack', 'block_point_view'),
                         get_string('redtrack', 'block_point_view'),
-                        get_string('blacktrack', 'block_point_view')
-                ),
-                array('class' => 'difficultytracks moduletrackselect', 'data-id' => $cmid)
+                        get_string('blacktrack', 'block_point_view'),
+                ],
+                [ 'class' => 'difficultytracks moduletrackselect', 'data-id' => $cmid ]
         );
 
         $mform->addGroup( $group, 'config_activity_' . $cmid, $label, '', false );
@@ -299,7 +299,7 @@ class block_point_view_edit_form extends block_edit_form {
 
         $mform->addElement('header', 'images_header', get_string('header_images', 'block_point_view'));
 
-        $pixfiles = array('easy', 'better', 'hard');
+        $pixfiles = [ 'easy', 'better', 'hard' ];
 
         $adminpixenabled = get_config('block_point_view', 'enable_pix_admin');
         $custompixexist = false;
@@ -308,7 +308,7 @@ class block_point_view_edit_form extends block_edit_form {
         // - default pix (in blocks/point_view/pix),
         // - admin pix (in block administration settings),
         // - custom pix (in block configuration).
-        $pix = array('default' => array(), 'admin' => array(), 'custom' => array());
+        $pix = [ 'default' => [], 'admin' => [], 'custom' => [] ];
         foreach ($pixfiles as $file) {
             $defaultsrc = $CFG->wwwroot . '/blocks/point_view/pix/' . $file . '.png';
             $pix['default'][$file] = $defaultsrc;
@@ -333,12 +333,12 @@ class block_point_view_edit_form extends block_edit_form {
         if ($custompixexist) {
             $deletecustombutton = $this->get_action_button('delete_custom_pix', 'warning', 'delete_custom_pix');
         } else {
-            $pix['custom'] = array();
+            $pix['custom'] = [];
             $deletecustombutton = null;
         }
 
         // Create select for the three options.
-        $pixselect = array();
+        $pixselect = [];
         $pixselect[] = &$mform->createElement('html', '<div class="pixselectgroup">');
         $this->create_emoji_radioselect($mform, $pixselect, 'default', $pix);
         if ($adminpixenabled) {
@@ -357,7 +357,7 @@ class block_point_view_edit_form extends block_edit_form {
                 'config_point_views_pix',
                 get_string('customemoji', 'block_point_view'),
                 null,
-                array('subdirs' => 0, 'maxfiles' => 11, 'accepted_types' => '.png')
+                [ 'subdirs' => 0, 'maxfiles' => 11, 'accepted_types' => '.png' ]
                 );
 
         $mform->addHelpButton('config_point_views_pix', 'customemoji', 'block_point_view');
@@ -372,12 +372,12 @@ class block_point_view_edit_form extends block_edit_form {
 
             $mform->addElement('text',
                     $elementname,
-                    html_writer::empty_tag('img', array(
+                    html_writer::empty_tag('img', [
                             'src' => $current[$file],
                             'class' => 'pix-preview currentpix my-1',
                             'alt' => $defaulttext,
-                            'data-reaction' => $file
-                    )) .
+                            'data-reaction' => $file,
+                    ]) .
                     get_string('emojidesc', 'block_point_view')
                     );
 
@@ -399,16 +399,16 @@ class block_point_view_edit_form extends block_edit_form {
      */
     protected function create_emoji_radioselect(&$mform, &$group, $value, $pix, $additionallegend = null) {
         $group[] = $mform->createElement('radio', 'config_pixselect', '',
-                get_string($value . 'pix', 'block_point_view'), $value, array('class' => 'pr-2 mr-0 w-100 justify-content-start'));
+                get_string($value . 'pix', 'block_point_view'), $value, [ 'class' => 'pr-2 mr-0 w-100 justify-content-start' ]);
 
         $legend = '<label for="id_config_pixselect_' . $value . '" class="d-inline-block">';
         foreach ($pix[$value] as $file => $src) {
-            $legend .= html_writer::empty_tag('img', array(
+            $legend .= html_writer::empty_tag('img', [
                     'src' => $src,
                     'class' => 'pix-preview my-1',
                     'data-reaction' => $file,
-                    'data-source' => $value
-            ));
+                    'data-source' => $value,
+            ]);
         }
         $legend .= '</label>';
         if ($additionallegend !== null) {
@@ -445,7 +445,7 @@ class block_point_view_edit_form extends block_edit_form {
 
         global $USER;
 
-        $errors = array();
+        $errors = [];
 
         if (isset($data['config_pixselect']) && $data['config_pixselect'] == 'custom') {
 
@@ -453,7 +453,7 @@ class block_point_view_edit_form extends block_edit_form {
 
             $usercontext = context_user::instance($USER->id);
 
-            $expected = array(
+            $expected = [
                 'easy',
                 'better',
                 'hard',
@@ -464,8 +464,8 @@ class block_point_view_edit_form extends block_edit_form {
                 'group_EB',
                 'group_EH',
                 'group_BH',
-                'group_EBH'
-            );
+                'group_EBH',
+            ];
 
             $draftfiles = $fs->get_area_files(
                 $usercontext->id,
@@ -524,7 +524,7 @@ class block_point_view_edit_form extends block_edit_form {
                 'block_point_view',
                 'content',
                 0,
-                array('subdirs' => true),
+                [ 'subdirs' => true ],
                 $currenttext
             );
             $defaults->config_text['itemid'] = $draftideditor;
@@ -538,11 +538,11 @@ class block_point_view_edit_form extends block_edit_form {
                 'block_point_view',
                 'point_views_pix',
                 0,
-                array(
+                [
                     'subdirs' => 0,
                     'maxfiles' => 20,
-                    'accepted_types' => array('.png')
-                )
+                    'accepted_types' => [ '.png' ],
+                ]
                 );
 
             $defaults->config_point_views_pix = $draftidpix;

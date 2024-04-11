@@ -36,7 +36,7 @@ function block_point_view_check_instance($instanceorid, $context, $errorcontext 
     if (is_object($instanceorid)) {
         $blockrecord = $instanceorid;
     } else {
-        $blockrecord = $DB->get_record('block_instances', array('id' => $instanceorid));
+        $blockrecord = $DB->get_record('block_instances', [ 'id' => $instanceorid ]);
     }
     if ($blockrecord === false || $blockrecord->parentcontextid != $context->id || $blockrecord->blockname != 'point_view') {
         throw new moodle_exception('invalidblockinstance', 'error', $errorurl,
@@ -76,7 +76,7 @@ function block_point_view_get_current_pix($blockinstance, $subset = null) {
     if ($subset !== null) {
         $pixfiles = $subset;
     } else {
-        $pixfiles = array(
+        $pixfiles = [
                 'easy',
                 'better',
                 'hard',
@@ -87,11 +87,11 @@ function block_point_view_get_current_pix($blockinstance, $subset = null) {
                 'group_EB',
                 'group_EH',
                 'group_BH',
-                'group_EBH'
-        );
+                'group_EBH',
+        ];
     }
 
-    $pix = array();
+    $pix = [];
 
     foreach ($pixfiles as $file) {
         $pix[$file] = false;
@@ -136,12 +136,12 @@ function block_point_view_get_difficulty_levels($blockinstance, $courseid) {
     // If difficulty tracks are disabled, do not put any track.
     if (!isset($blockinstance->config->enable_difficultytracks)
             || !$blockinstance->config->enable_difficultytracks) {
-        return array();
+        return [];
     }
 
     $cms = get_fast_modinfo($courseid, -1)->cms;
 
-    $difficultylevels = array();
+    $difficultylevels = [];
 
     // Loop through modules.
     foreach ($cms as $cm) {
@@ -151,10 +151,10 @@ function block_point_view_get_difficulty_levels($blockinstance, $courseid) {
             $difficulty = 0;
         }
 
-        $difficultylevels[] = array(
+        $difficultylevels[] = [
                 'id' => $cm->id,
-                'difficultyLevel' => $difficulty
-        );
+                'difficultyLevel' => $difficulty,
+        ];
     }
 
     return $difficultylevels;
@@ -172,11 +172,11 @@ function block_point_view_get_modules_with_reactions($blockinstance, $userid, $c
     global $DB;
 
     if (empty($blockinstance->config->enable_point_views)) {
-        return array();
+        return [];
     }
 
     $cms = get_fast_modinfo($courseid, $userid)->cms;
-    $moduleswithreactions = array();
+    $moduleswithreactions = [];
     foreach ($cms as $cm) {
         if (isset($blockinstance->config->{'moduleselectm' . $cm->id})
         && $blockinstance->config->{'moduleselectm' . $cm->id} > 0
@@ -186,12 +186,12 @@ function block_point_view_get_modules_with_reactions($blockinstance, $userid, $c
     }
 
     if (empty($moduleswithreactions)) {
-        return array();
+        return [];
     }
 
     list($insql, $inparams) = $DB->get_in_or_equal($moduleswithreactions, SQL_PARAMS_NAMED);
 
-    $params = array_merge($inparams, array('userid' => $userid, 'courseid' => $courseid));
+    $params = array_merge($inparams, [ 'userid' => $userid, 'courseid' => $courseid ]);
 
     if (isset($blockinstance->config->show_other_users_reactions)
             && !$blockinstance->config->show_other_users_reactions
@@ -231,7 +231,7 @@ function block_point_view_get_modules_with_reactions($blockinstance, $userid, $c
 
         // TODO optimize this loading time, maybe add some indexes to the table.
 
-        $params = array_merge($inparams, array('userid' => $userid, 'courseid' => $courseid));
+        $params = array_merge($inparams, [ 'userid' => $userid, 'courseid' => $courseid ]);
 
         return array_values($DB->get_records_sql($sql, $params)); // Takes < 0.1s on small DB.
     }
@@ -241,13 +241,13 @@ function block_point_view_get_modules_with_reactions($blockinstance, $userid, $c
  * Get difficulty tracks colors, as set in plugin administration configuration.
  */
 function block_point_view_get_track_colors() {
-    return array(
+    return [
             '',
             get_config('block_point_view', 'green_track_color_admin'),
             get_config('block_point_view', 'blue_track_color_admin'),
             get_config('block_point_view', 'red_track_color_admin'),
-            get_config('block_point_view', 'black_track_color_admin')
-    );
+            get_config('block_point_view', 'black_track_color_admin'),
+    ];
 }
 
 
@@ -278,23 +278,23 @@ function block_point_view_format_users($userids, $users) {
  */
 function block_point_view_require_edit_form_javascript($blockcontextid) {
     global $COURSE, $PAGE;
-    $envconf = array(
+    $envconf = [
             'courseid' => $COURSE->id,
-            'contextid' => $blockcontextid
-    );
+            'contextid' => $blockcontextid,
+    ];
 
     $trackcolors = block_point_view_get_track_colors();
 
-    $params = array($envconf, $trackcolors);
+    $params = [ $envconf, $trackcolors ];
 
     $PAGE->requires->js_call_amd('block_point_view/script_config_point_view', 'init', $params);
     $PAGE->requires->string_for_js('resetreactionsconfirmation', 'block_point_view', format_string($COURSE->fullname));
     $PAGE->requires->string_for_js('cleanupreactionsconfirmation', 'block_point_view', format_string($COURSE->fullname));
-    $PAGE->requires->strings_for_js(array(
+    $PAGE->requires->strings_for_js([
                                             'deleteemojiconfirmation',
                                             'reactionsresetsuccessfully',
                                             'reactionscleanedupsuccessfully',
-                                            'resetreactionsonmoduleconfirmation'
-                                    ), 'block_point_view');
-    $PAGE->requires->strings_for_js(array('ok', 'info'), 'moodle');
+                                            'resetreactionsonmoduleconfirmation',
+                                    ], 'block_point_view');
+    $PAGE->requires->strings_for_js([ 'ok', 'info' ], 'moodle');
 }
