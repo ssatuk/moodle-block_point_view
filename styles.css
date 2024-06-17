@@ -59,6 +59,11 @@
     flex: 1 0;
 }
 
+.activity .activity-grid .block_point_view.reactions-container {
+    right: 38px;
+    bottom: 1em;
+}
+
 .activity-item.activityinline .block_point_view.reactions-container {
     margin-right: 1.5rem;
 }
@@ -98,10 +103,10 @@
 }
 
 .activity-wrapper .block_point_view.reactions-container .group {
-    right: 8px;
+    right: 28px;
 }
 .activity-wrapper.label .block_point_view.reactions-container .group {
-    right: 38px;
+    right: 58px;
 }
 
 .path-mod #page-header .block_point_view.reactions-container {
@@ -147,6 +152,9 @@
     width: 1.1em;
     height: 1.1em;
     display: inline-block;
+    position: absolute;
+    right: -1.5em;
+    top: .3em;
 }
 
 .block_point_view.reactions-container .group_nb.voted {
@@ -176,6 +184,13 @@
     margin-left: -15px;
 }
 
+.path-course-view .activity .activity-grid .block_point_view.track {
+    margin-left: -13px;
+}
+
+.path-course-view .activity-grid > .block_point_view.track {
+    height: 50%;
+}
 .path-course-view .activity-instance .block_point_view.track {
     height: 100%;
 }

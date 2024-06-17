@@ -25,16 +25,16 @@ define(['jquery', 'core/ajax', 'core/notification'], function($, ajax, notificat
      * depending on whether they are enabled or not.
      */
     function manageElementsVisibility() {
-        var $enableReactions = $('#id_config_enable_point_views');
-        var $enableDifficultyTracks = $('#id_config_enable_difficultytracks');
+        var $enableReactions = $('[name="config_enable_point_views"]');
+        var $enableDifficultyTracks = $('[name="config_enable_difficultytracks"]');
 
         var updateElementsVisibility = function() {
             var reactionsEnabled = $enableReactions.val() > 0;
             var difficultyTracksEnabled = $enableDifficultyTracks.val() > 0;
 
-            $('#id_activities_header').toggle(reactionsEnabled || difficultyTracksEnabled);
+            $('fieldset[id^=id_activities_header]').toggle(reactionsEnabled || difficultyTracksEnabled);
 
-            $('.reactions, #id_images_header').toggle(reactionsEnabled);
+            $('.reactions, fieldset[id^=id_images_header]').toggle(reactionsEnabled);
             $('.difficultytracks').toggle(difficultyTracksEnabled);
         };
 
@@ -143,7 +143,7 @@ define(['jquery', 'core/ajax', 'core/notification'], function($, ajax, notificat
                         // Refresh draft area files.
                         // # For an unknown reason, the following instruction with jQuery does not work
                         // # (or at least does not trigger the expected listener).
-                        document.querySelector('#fitem_id_config_point_views_pix .fp-path-folder-name').click();
+                        document.querySelector('[id^=fitem_id_config_point_views_pix] .fp-path-folder-name').click();
                     }
             );
 

@@ -69,9 +69,14 @@ define(['jquery', 'core/ajax', 'core/notification'], function($, ajax, notificat
             });
             // Decide where to put the track.
             var $container = $('#module-' + module.id + ' .activitytitle');
+            if ($container.closest('.activity-grid').length) {
+                // Moodle 4.3+.
+                $container = $container.closest('.activity-grid');
+            }
             if ($container.length === 0) {
                 // This seems to be a label.
-                $container = $('#module-' + module.id + ' .activity-item .description');
+                $container = $('#module-' + module.id + ' .activity-item .description,' +
+                                '#module-' + module.id + ' .activity-item .activity-altcontent').first();
             }
 
             // Add the track.
@@ -145,7 +150,7 @@ define(['jquery', 'core/ajax', 'core/notification'], function($, ajax, notificat
                 var $module = $('#module-' + moduleId);
                 if ($module.is('.modtype_label')) {
                     // Label.
-                    $module.find('.description').before(reactionsHtml);
+                    $module.find('.description, .activity-grid').first().before(reactionsHtml);
                 } else if ($module.find('.tiles-activity-container').length) {
                     // Tiles format.
                     $module.find('.tiles-activity-container').after(reactionsHtml);
@@ -313,8 +318,9 @@ define(['jquery', 'core/ajax', 'core/notification'], function($, ajax, notificat
 
             $get(moduleId, '.group_nb').delay(200).hide(300);
 
-            $('#module-' + moduleId + ' .activity-info button[data-action="toggle-manual-completion"],' +
-              '#module-' + moduleId + ' .activity-info .automatic-completion-conditions > span.badge:first-of-type')
+            $('#module-' + moduleId + ' button[data-action="toggle-manual-completion"],' +
+              '#module-' + moduleId + ' .activity-info .automatic-completion-conditions > span.badge:first-of-type,' +
+              '#module-' + moduleId + ' .activity-information [data-region="completionrequirements"]')
             .delay(200).queue(function(next) {
                 // Use opacity transition for a smooth hiding.
                 $(this).css({
@@ -373,8 +379,9 @@ define(['jquery', 'core/ajax', 'core/notification'], function($, ajax, notificat
 
             $get(moduleId, '.group_nb').delay(600).show(0);
 
-            $('#module-' + moduleId + ' .activity-info button[data-action="toggle-manual-completion"],' +
-              '#module-' + moduleId + ' .activity-info .automatic-completion-conditions > span.badge:first-of-type')
+            $('#module-' + moduleId + ' button[data-action="toggle-manual-completion"],' +
+              '#module-' + moduleId + ' .activity-info .automatic-completion-conditions > span.badge:first-of-type,' +
+              '#module-' + moduleId + ' .activity-information [data-region="completionrequirements"]')
             .delay(600).queue(function(next) {
                 $(this).removeClass('invisible');
                 // Use opacity transition for a smooth showing back.

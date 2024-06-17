@@ -39,6 +39,11 @@ require_once(__DIR__ . '/locallib.php');
 class block_point_view_edit_form extends block_edit_form {
 
     /**
+     * @var boolean Whether javascript should be added on display (needed since Moodle 4.2 and dynamic forms).
+     */
+    protected $addjs = false;
+
+    /**
      * Configuration page
      *
      * @param MoodleQuickForm $mform
@@ -188,12 +193,23 @@ class block_point_view_edit_form extends block_edit_form {
             $mform->addElement('html', html_writer::div(
                     html_writer::tag('legend', get_string('resetreactionsbymodule', 'block_point_view')) . $cmshtml, 'ml-3 mb-2'));
 
+            $this->addjs = true;
+        } else {
+            $this->add_warning_message($mform, get_string('blockdisabled', 'block_point_view'));
+        }
+    }
+
+    /**
+     * {@inheritDoc}
+     * @see moodleform::display()
+     */
+    public function display() {
+        parent::display();
+        // Javascript needs to be added from display() function, since Moodle 4.2 and dynamic forms.
+        if ($this->addjs) {
             // Call javascript from a static function in locallib, because Moodle linter won't let us call global $PAGE from here
             // (and $this->page actually contains the course page, not the edit form page).
             block_point_view_require_edit_form_javascript($this->block->context->id);
-
-        } else {
-            $this->add_warning_message($mform, get_string('blockdisabled', 'block_point_view'));
         }
     }
 
