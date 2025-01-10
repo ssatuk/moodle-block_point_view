@@ -124,7 +124,8 @@ class block_point_view extends block_base {
                 );
             }
 
-            if ($this->page->cm !== null
+            if ($this->page->user_is_editing()
+                    && $this->page->cm !== null
                     && (!empty($this->config->enable_point_views) || !empty($this->config->enable_difficultytracks))
                     && has_capability('moodle/block:edit', $this->context)) {
                 $this->content->text .= html_writer::div(
@@ -143,7 +144,8 @@ class block_point_view extends block_base {
                 $this->content->text .= $moduleform->render();
             }
 
-            if ((!$this->instance->showinsubcontexts || !preg_match('/^(?:mod-)?\\*$/', $this->instance->pagetypepattern))
+            if ($this->page->user_is_editing()
+                    && (!$this->instance->showinsubcontexts || !preg_match('/^(?:mod-)?\\*$/', $this->instance->pagetypepattern))
                     && has_capability('moodle/block:edit', $this->context)) {
                 $this->content->text .=
                     '<div>
