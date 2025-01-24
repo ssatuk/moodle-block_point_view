@@ -236,7 +236,7 @@ class block_point_view extends block_base {
             if (($this->config->highlight_activity_rows ?? true)) {
                 // Add shade on hover of a course module.
                 $cssnode = '<style type="text/css">
-                                .activity:hover{
+                                .activity:not(.subsection):hover{
                                     background:linear-gradient(to right,rgba(0,0,0,0.04),rgba(0,0,0,0.04),transparent);
                                     border-radius:5px;
                                 }

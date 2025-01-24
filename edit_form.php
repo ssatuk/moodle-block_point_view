@@ -105,6 +105,11 @@ class block_point_view_edit_form extends block_edit_form {
 
             // Enable/Disable by activity module type.
             foreach ($modtypes as $type) {
+                if ($type === 'subsection') {
+                    // Do not support subsections.
+                    continue;
+                }
+
                 $this->add_enable_disable_buttons($mform, '',
                         $type,
                         'enable_type', 'disable_type',
@@ -118,6 +123,10 @@ class block_point_view_edit_form extends block_edit_form {
             $sectionid = 0;
             // Enable/Disable by activity or section.
             foreach ($cms as $cm) {
+                if ($cm->modname === 'subsection') {
+                    // Do not support subsections.
+                    continue;
+                }
 
                 if ($cm->sectionnum != $oldsection) {
 

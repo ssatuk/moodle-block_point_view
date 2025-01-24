@@ -145,6 +145,11 @@ function block_point_view_get_difficulty_levels($blockinstance, $courseid) {
 
     // Loop through modules.
     foreach ($cms as $cm) {
+        if ($cm->modname === 'subsection') {
+            // Do not support subsections.
+            continue;
+        }
+
         if (isset($blockinstance->config->{'difficulty_' . $cm->id})) {
             $difficulty = $blockinstance->config->{'difficulty_' . $cm->id};
         } else {
@@ -178,6 +183,11 @@ function block_point_view_get_modules_with_reactions($blockinstance, $userid, $c
     $cms = get_fast_modinfo($courseid, $userid)->cms;
     $moduleswithreactions = [];
     foreach ($cms as $cm) {
+        if ($cm->modname === 'subsection') {
+            // Do not support subsections.
+            continue;
+        }
+
         if (isset($blockinstance->config->{'moduleselectm' . $cm->id})
         && $blockinstance->config->{'moduleselectm' . $cm->id} > 0
         && $cm->uservisible) {
