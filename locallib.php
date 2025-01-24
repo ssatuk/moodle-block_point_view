@@ -286,7 +286,7 @@ function block_point_view_format_users($userids, $users) {
  *
  * @param int $blockcontextid Context id of the block.
  */
-function block_point_view_require_edit_form_javascript($blockcontextid, $formpage = null) {
+function block_point_view_require_edit_form_javascript($blockcontextid) {
     global $COURSE, $PAGE;
     $envconf = [
             'courseid' => $COURSE->id,
@@ -297,18 +297,16 @@ function block_point_view_require_edit_form_javascript($blockcontextid, $formpag
 
     $params = [ $envconf, $trackcolors ];
 
-    $jspage = $formpage ?? $PAGE;
-
-    $jspage->requires->js_call_amd('block_point_view/script_config_point_view', 'init', $params);
-    $jspage->requires->string_for_js('resetreactionsconfirmation', 'block_point_view', format_string($COURSE->fullname));
-    $jspage->requires->string_for_js('cleanupreactionsconfirmation', 'block_point_view', format_string($COURSE->fullname));
-    $jspage->requires->strings_for_js([
+    $PAGE->requires->js_call_amd('block_point_view/script_config_point_view', 'init', $params);
+    $PAGE->requires->string_for_js('resetreactionsconfirmation', 'block_point_view', format_string($COURSE->fullname));
+    $PAGE->requires->string_for_js('cleanupreactionsconfirmation', 'block_point_view', format_string($COURSE->fullname));
+    $PAGE->requires->strings_for_js([
                                             'deleteemojiconfirmation',
                                             'reactionsresetsuccessfully',
                                             'reactionscleanedupsuccessfully',
                                             'resetreactionsonmoduleconfirmation',
                                     ], 'block_point_view');
-    $jspage->requires->strings_for_js([ 'ok', 'info' ], 'moodle');
+    $PAGE->requires->strings_for_js([ 'ok', 'info' ], 'moodle');
 }
 
 /**

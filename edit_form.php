@@ -39,7 +39,7 @@ require_once(__DIR__ . '/locallib.php');
 class block_point_view_edit_form extends block_edit_form {
 
     /**
-     * @var boolean Whether javascript should be added on display (needed since Moodle 4.2 and dynamic forms).
+     * @var bool Whether javascript should be added on display (needed since Moodle 4.2 and dynamic forms).
      */
     protected $addjs = false;
 
