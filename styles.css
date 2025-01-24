@@ -57,6 +57,7 @@
 
 .activity-wrapper .block_point_view.reactions-container {
     flex: 1 0;
+    right: 18px;
 }
 
 .activity .activity-grid .block_point_view.reactions-container {
@@ -64,8 +65,8 @@
     bottom: 1em;
 }
 
-.activity-item.activityinline .block_point_view.reactions-container {
-    margin-right: 1.5rem;
+.activity-item.activityinline > .block_point_view.reactions-container {
+    right: 21px;
 }
 
 .block_point_view.reactions-container + .description .activity-altcontent {
@@ -186,6 +187,8 @@
 
 .path-course-view .activity .activity-grid .block_point_view.track {
     margin-left: -13px;
+    align-self: start;
+    height: 2rem;
 }
 
 .path-course-view .activity-grid > .block_point_view.track {
