@@ -240,6 +240,9 @@ class block_point_view extends block_base {
                                     background:linear-gradient(to right,rgba(0,0,0,0.04),rgba(0,0,0,0.04),transparent);
                                     border-radius:5px;
                                 }
+                                .activity:not(.subsection):hover .activity-item{
+                                    background:unset;
+                                }
                             </style>';
             } else {
                 $cssnode = '';
