@@ -26,7 +26,7 @@
 defined('MOODLE_INTERNAL') || die();
 
 $plugin->component = 'block_point_view';
-$plugin->version   = 2024061700;
+$plugin->version   = 2025010700;
 $plugin->requires  = 2022041900; // Moodle 4.0.
 $plugin->maturity = MATURITY_STABLE;
-$plugin->release = '2.2 for Moodle 4';
+$plugin->release = '2.3 for Moodle 4';
