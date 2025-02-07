@@ -86,7 +86,8 @@ class block_point_view_external extends external_api {
                         && $blockinstance->config->enable_point_views
                         && isset($blockinstance->config->{'moduleselectm' . $params['cmid']})
                         && $blockinstance->config->{'moduleselectm' . $params['cmid']}
-                        && get_fast_modinfo($params['courseid'], $USER->id)->cms[$params['cmid']]->uservisible;
+                        && get_fast_modinfo($params['courseid'], $USER->id)->cms[$params['cmid']]->uservisible
+                        && has_capability('block/point_view:addreaction', $blockinstance->context, $USER->id);
 
                 if (!$canreact) {
                     throw new moodle_exception('reactionsunavailable', 'block_point_view');

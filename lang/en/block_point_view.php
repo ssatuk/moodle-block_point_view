@@ -75,6 +75,7 @@ $string['noreactionsyet'] = 'There is no course module with reactions yet.';
 $string['pluginname'] = 'Point of view';
 $string['point_view:access_overview'] = 'View reactions details';
 $string['point_view:addinstance'] = 'Add a Point of View block instance';
+$string['point_view:addreaction'] = 'See reaction zone and add reactions';
 $string['point_view:myaddinstance'] = 'Add a Point of View block instance on dashboard';
 $string['privacy:metadata:activity_votes_database:cmid'] = 'Course activity ID';
 $string['privacy:metadata:activity_votes_database:courseid'] = 'Course ID';
