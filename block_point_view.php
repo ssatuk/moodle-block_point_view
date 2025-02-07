@@ -105,7 +105,6 @@ class block_point_view extends block_base {
             if (has_capability('block/point_view:access_overview', $this->context)) {
                 $parameters = [
                     'instanceid' => $this->instance->id,
-                    'contextid' => $this->context->id,
                     'courseid' => $COURSE->id,
                 ];
 

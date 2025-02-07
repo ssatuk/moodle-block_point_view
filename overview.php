@@ -31,7 +31,6 @@ require_login();
 
 $id = required_param('instanceid', PARAM_INT);
 $courseid = required_param('courseid', PARAM_INT);
-$contextid = required_param('contextid', PARAM_INT);
 $downloadformat = optional_param('downloadformat', '', PARAM_RAW);
 
 $context = context_course::instance($courseid);
@@ -49,7 +48,6 @@ block_point_view_check_instance($blockrecord, $context, format_string($course->f
 
 $parameters = [
         'instanceid' => $id,
-        'contextid'  => $contextid,
         'courseid'   => $courseid,
 ];
 
