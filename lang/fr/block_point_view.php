@@ -23,12 +23,10 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-$string['pluginname'] = 'Point de vue';
-
 $string['adminpix'] = 'Défaut (site) :';
 $string['blacktrack'] = 'Piste noire';
-$string['bluetrack'] = 'Piste bleue';
 $string['blockdisabled'] = '<h3 class="text-danger">Le bloc est désactivé</h3>';
+$string['bluetrack'] = 'Piste bleue';
 $string['cleanupcoursereactions'] = 'Nettoyer les réaction du cours <b>{$a}</b>';
 $string['cleanupreactions'] = 'Nettoyer les réactions';
 $string['cleanupreactions_help'] = 'Nettoyer (supprimer) les réactions des utilisateurs qui ne sont plus inscrits dans le cours';
@@ -38,42 +36,51 @@ $string['contentinputlabel_help'] = 'Ce champ permet de modifier le texte visibl
 $string['customemoji'] = 'Emoji personnalisés';
 $string['customemoji_help'] = 'Des emoji personnalisés à utiliser comme réactions peuvent être définis ici.<h5 class="text-danger">Important :</h5>Nommer les fichiers <b><code>[nom_emoji].png</code></b> pour les emoji : <code>easy.png</code>, <code>better.png</code> et <code>hard.png</code>. Les groupes d\'emoji sont aussi nécessaires : <b><code>group_[initiales_des_emoji].png</code></b>, par exemple : <code>group_EB.png</code> pour le groupe des réactions Easy et Better. Ne pas oublier le fichier <b><code>group_.png</code></b> pour l\'image de « Aucun vote ». La taille recommandée des images est de 200x200 pour les emoji et 400x200 pour les groupes.<br/><br/> 11 fichiers attendus : <code>easy.png</code>, <code>better.png</code>, <code>hard.png</code>, <code>group_.png</code>, <code>group_E.png</code>, <code>group_B.png</code>, <code>group_H.png</code>, <code>group_EB.png</code>, <code>group_EH.png</code>, <code>group_BH.png</code> et <code>group_EBH.png</code>';
 $string['custompix'] = 'Personnalisé :';
-$string['header_activities'] = 'Configuration des Réactions et Pistes de difficulté';
-$string['header_images'] = 'Configuration des Emoji';
 $string['defaultpix'] = 'Défaut :';
 $string['defaulttextbetter'] = 'Je m\'améliore !';
 $string['defaulttextcontent'] = 'Ce plugin offre la possibilité de réagir et de donner des niveaux de difficulté aux activités.</br></br>Ce plugin est développé par <a href="mailto:q.fombaron@outlook.fr?subject=%22Point%20of%20view%22%20Moodle%20plugin%20-%20Feedback">Quentin Fombaron</a>.<br/><br/>Vous pouvez modifier ou effacer ce texte dans le menu de configuration du bloc.<br/><br/>';
 $string['defaulttexteasy'] = 'Fastoche !';
 $string['defaulttexthard'] = 'Dur dur...';
+$string['delete_custom_pix'] = 'Supprimer les emoji personnalisés';
 $string['deleteemojiconfirmation'] = 'Êtes-vous sûr de vouloir supprimer les emoji personnalisés pour ce bloc ?
 Cela supprimera les emoji actuellement enregistrés et les fichiers dans la zone ci-dessous. Cette action est irréversible.';
-$string['delete_custom_pix'] = 'Supprimer les emoji personnalisés';
-$string['disableall'] = 'Désactiver toutes les réactions dans <b>{$a}</b>';
 $string['disable_type'] = 'Désactiver toutes les réactions pour les <b>{$a}</b>';
+$string['disableall'] = 'Désactiver toutes les réactions dans <b>{$a}</b>';
 $string['emojidesc'] = 'Description de l\'emoji';
 $string['emojidesc_help'] = 'Texte personnalisé qui sera affiché au survol de la réaction';
 $string['emojitouse'] = 'Emoji à utiliser';
 $string['emojitouse_help'] = 'Choisir les emoji à utiliser comme réactions dans ce cours.<br>Vous pouvez ajouter vos propres emoji personnalisés en sélectionnant « Personnalisé ».';
+$string['enable_disable_section'] = 'Activer/désactiver toutes les réactions dans cette section';
+$string['enable_disable_section_help'] = 'Activer ou désactiver les réactions pour tous les modules dans cette section.';
+$string['enable_disable_type'] = 'Activer/désactiver toutes les réactions pour ce type de module';
+$string['enable_disable_type_help'] = 'Activer ou désactiver les réactions pour tous les modules de ce type dans ce cours.';
+$string['enable_type'] = 'Activer toutes les réactions pour les <b>{$a}</b>';
 $string['enableall'] = 'Activer toutes les réactions dans <b>{$a}</b>';
 $string['enablecustompix'] = 'Utiliser des emoji personnalisés';
 $string['enabledifficulties'] = 'Activer les <b>Pistes de difficulté</b>';
 $string['enableforfuturemodules'] = 'Activer pour les futurs modules';
 $string['enableforfuturemodules_help'] = 'Activer automatiquement les réactions pour les nouveaux modules créés dans ce cours.';
 $string['enablepoint_views'] = 'Activer les <b>Réactions</b>';
-$string['enable_disable_section'] = 'Activer/désactiver toutes les réactions dans cette section';
-$string['enable_disable_section_help'] = 'Activer ou désactiver les réactions pour tous les modules dans cette section.';
-$string['enable_disable_type'] = 'Activer/désactiver toutes les réactions pour ce type de module';
-$string['enable_disable_type_help'] = 'Activer ou désactiver les réactions pour tous les modules de ce type dans ce cours.';
-$string['enable_type'] = 'Activer toutes les réactions pour les <b>{$a}</b>';
 $string['errorfilemanager'] = '<b>ERREUR</b> : Le nom du fichier <b>{$a}.png</b> n\'est pas conforme.';
 $string['errorfilemanagerempty'] = 'Veuillez fournir au moins un fichier.';
 $string['greentrack'] = 'Piste verte';
+$string['header_activities'] = 'Configuration des Réactions et Pistes de difficulté';
+$string['header_images'] = 'Configuration des Emoji';
 $string['highlightactivityrows'] = 'Afficher un dégradé sur les activités sur la page de cours';
 $string['highlightactivityrows_help'] = 'Afficher un dégradé au survol des activités sur la page de cours. Cette fonctionnalité est pensée pour améliorer la lisibilité et l\'association entre réactions et activité sur une même ligne, mais peut être désactivée sans problème.';
 $string['module'] = 'Module';
 $string['noactivity'] = 'Aucune activité';
 $string['nonetrack'] = 'Aucune piste';
 $string['noreactionsyet'] = 'Il n\'y a aucun module de cours avec des réactions pour le moment.';
+$string['pluginname'] = 'Point de vue';
+$string['point_view:access_overview'] = 'Voir le détail des réactions';
+$string['point_view:addinstance'] = 'Ajouter une instance du bloc Point de Vue';
+$string['point_view:myaddinstance'] = 'Ajouter une instance du bloc Point de Vue sur le tableau de bord';
+$string['privacy:metadata:activity_votes_database:cmid'] = 'ID de l\'activité';
+$string['privacy:metadata:activity_votes_database:courseid'] = 'ID du Cours';
+$string['privacy:metadata:activity_votes_database:userid'] = 'ID de l\'utilisateur';
+$string['privacy:metadata:activity_votes_database:vote'] = 'Vote : 1 (Fastoche !), 2 (Je m\'améliore !), 3 (Dur dur...)';
+$string['privacy:metadata:block_point_view'] = 'Point de Vue stocke le vote des utilisateurs sur chaque activité.';
 $string['reactions'] = 'Réactions';
 $string['reactionscleanedupsuccessfully'] = 'Les réactions ont été correctement nettoyées.';
 $string['reactionsdetails'] = 'Détail des réactions';
@@ -82,21 +89,11 @@ $string['reactionsunavailable'] = 'Vous ne pouvez pas ajouter ou retirer de réa
 $string['redtrack'] = 'Piste rouge';
 $string['resetcoursereactions'] = 'Réinitialiser les réactions du cours <b>{$a}</b>';
 $string['resetreactions'] = 'Réinitialiser les réactions';
-$string['resetreactionsbymodule'] = 'Réinitialiser les réactions par module :';
-$string['resetreactionsheader'] = 'Nettoyer ou réinitialiser les réactions';
 $string['resetreactions_help'] = 'Réinitialiser (supprimer) toutes les réactions des utilisateurs dans ce cours.';
+$string['resetreactionsbymodule'] = 'Réinitialiser les réactions par module :';
 $string['resetreactionsconfirmation'] = 'Êtes-vous sûr de vouloir réinitialiser (supprimer) toutes les réactions des utilisateurs dans <b>{$a}</b> ? Cette action est irréversible.';
+$string['resetreactionsheader'] = 'Nettoyer ou réinitialiser les réactions';
 $string['resetreactionsonmoduleconfirmation'] = 'Êtes-vous sûr de vouloir réinitialiser (supprimer) toutes les réactions des utilisateurs sur ce module ? Cette action est irréversible.';
 $string['showotherreactions'] = 'Montrer les réactions des autres utilisateurs';
 $string['showotherreactions_help'] = 'Permettre aux étudiants de voir le nombre de réactions de chaque type par les autres utilisateurs pour chaque module.';
 $string['totalreactions'] = 'Réactions totales : {$a}';
-
-$string['point_view:access_overview'] = 'Voir le détail des réactions';
-$string['point_view:addinstance'] = 'Ajouter une instance du bloc Point de Vue';
-$string['point_view:myaddinstance'] = 'Ajouter une instance du bloc Point de Vue sur le tableau de bord';
-
-$string['privacy:metadata:block_point_view'] = 'Point de Vue stocke le vote des utilisateurs sur chaque activité.';
-$string['privacy:metadata:activity_votes_database:courseid'] = 'ID du Cours';
-$string['privacy:metadata:activity_votes_database:cmid'] = 'ID de l\'activité';
-$string['privacy:metadata:activity_votes_database:userid'] = 'ID de l\'utilisateur';
-$string['privacy:metadata:activity_votes_database:vote'] = 'Vote : 1 (Fastoche !), 2 (Je m\'améliore !), 3 (Dur dur...)';
