@@ -86,7 +86,8 @@ class block_point_view_external extends external_api {
                         && $blockinstance->config->enable_point_views
                         && isset($blockinstance->config->{'moduleselectm' . $params['cmid']})
                         && $blockinstance->config->{'moduleselectm' . $params['cmid']}
-                        && get_fast_modinfo($params['courseid'], $USER->id)->cms[$params['cmid']]->uservisible;
+                        && get_fast_modinfo($params['courseid'], $USER->id)->cms[$params['cmid']]->uservisible
+                        && has_capability('block/point_view:addreaction', $blockinstance->context, $USER->id);
 
                 if (!$canreact) {
                     throw new moodle_exception('reactionsunavailable', 'block_point_view');
@@ -100,16 +101,26 @@ class block_point_view_external extends external_api {
 
                 if ($params['vote'] === 0) {
                     $DB->delete_records($table, $dbparams);
+                    $eventclass = '\block_point_view\event\reaction_removed';
                 } else {
                     $currentvote = $DB->get_record($table, $dbparams);
                     if ($currentvote === false) {
                         $dbparams['vote'] = $params['vote'];
                         $DB->insert_record($table, $dbparams);
+                        $eventclass = '\block_point_view\event\reaction_added';
                     } else {
                         $currentvote->vote = $params['vote'];
                         $DB->update_record($table, $currentvote);
+                        $eventclass = '\block_point_view\event\reaction_updated';
                     }
                 }
+
+                $event = $eventclass::create([
+                        'relateduserid' => $USER->id,
+                        'other' => [ 'blockid' => $blockrecord->id, 'cmid' => $params['cmid'] ],
+                        'context' => $coursecontext,
+                ]);
+                $event->trigger();
 
                 break;
             case 'reset':
